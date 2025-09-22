@@ -54,12 +54,12 @@ function App() {
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen font-sans">
+    <div className="w-full bg-gray-100 min-h-screen font-sans">
       <header className="bg-blue-600 text-white p-6 shadow-md">
         <h1 className="text-4xl font-bold text-center">Personal Expense Tracker</h1>
       </header>
       
-      <main className="container mx-auto p-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <main className="w-full p-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-1 bg-white p-6 rounded-lg shadow-lg">
           <h2 className="text-2xl font-semibold mb-4 border-b pb-2">
             {editingTransaction ? 'Edit Transaksi' : 'Tambah Transaksi Baru'}

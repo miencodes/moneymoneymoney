@@ -27,18 +27,33 @@ app.get('/api/transactions', async (req, res) => {
 
 // 2. POST: Membuat transaksi baru (Input)
 app.post('/api/transactions', async (req, res) => {
+  // Pelacak 1: Untuk memastikan endpoint ini terpanggil
+  console.log('--- Endpoint POST /api/transactions diakses ---');
+  
+  // Pelacak 2: Untuk melihat data apa yang dikirim dari frontend
+  console.log('Data yang diterima dari frontend:', req.body);
+
   try {
     const { name, amount, category, date } = req.body;
+
+    // Pastikan amount adalah angka
+    const parsedAmount = parseFloat(amount);
+    if (isNaN(parsedAmount)) {
+        return res.status(400).json({ error: 'Jumlah (amount) harus berupa angka.' });
+    }
+
     const newTransaction = await prisma.transaction.create({
       data: {
         name,
-        amount: parseFloat(amount),
+        amount: parsedAmount,
         category,
         date: new Date(date),
       },
     });
     res.status(201).json(newTransaction);
   } catch (error) {
+    // Pelacak 3: Ini akan MENANGKAP DAN MENAMPILKAN error yang sebenarnya
+    console.error('!!! TERJADI ERROR SAAT MENYIMPAN:', error); 
     res.status(500).json({ error: 'Gagal membuat transaksi baru' });
   }
 });

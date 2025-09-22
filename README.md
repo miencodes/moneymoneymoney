@@ -96,6 +96,7 @@ WebApp *full-stack* sederhana untuk mencatat dan memvisualisasikan pengeluaran p
 
 ---
 ## 📄 Documented by Me, I Putu Mahendra Putra
+## 📄 Assisted by Artificial Intelegence 😏
 
 
 

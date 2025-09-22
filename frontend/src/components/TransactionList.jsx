@@ -16,7 +16,7 @@ const TransactionList = ({ transactions, onEdit, onDelete }) => {
         // KODE BARU DENGAN CONSOLE.LOG
 <tbody>
   {transactions.map((t) => {
-    // mata mata
+    // mata mata :P
     console.log('Mencoba menampilkan data transaksi:', t); 
 
     return (

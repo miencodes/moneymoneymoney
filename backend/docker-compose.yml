@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  # Layanan Database (PostgreSQL)
+  db:
+    image: postgres:14-alpine
+    container_name: cuan_tracker_db
+    restart: always
+    environment:
+      - POSTGRES_USER=myuser
+      - POSTGRES_PASSWORD=mypassword
+      - POSTGRES_DB=expense_tracker
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  # Layanan Backend (Node.js API)
+  backend:
+    build: ./backend
+    container_name: cuan_tracker_backend
+    restart: always
+    ports:
+      - '5000:5000'
+    environment:
+      # PENTING: Host database adalah nama layanan 'db', bukan 'localhost'
+      - DATABASE_URL=postgresql://myuser:mypassword@db:5432/expense_tracker
+    depends_on:
+      - db
+
+  # Layanan Frontend (React App)
+  frontend:
+    build: ./frontend
+    container_name: cuan_tracker_frontend
+    restart: always
+    ports:
+      - '5173:80' # Kita akses dari browser di port 5173, Nginx di kontainer berjalan di port 80
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
